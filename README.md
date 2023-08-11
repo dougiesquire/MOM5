@@ -1,3 +1,5 @@
+[![Test MOM5 compilation](https://github.com/ACCESS-NRI/MOM5/actions/workflows/test-build.yml/badge.svg?branch=master)](https://github.com/ACCESS-NRI/MOM5/actions/workflows/test-build.yml)
+
 # ACCESS-NRI Fork of Modular Ocean Model version 5 (MOM5)
 
 This is the [ACCESS-NRI](https://www.access-nri.org.au) fork of the MOM5 Ocean Model.
