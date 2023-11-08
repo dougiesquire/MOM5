@@ -467,6 +467,22 @@ if( $suffix eq '.a' ) {
    print MAKEFILE "$opt_p: \$(OBJ) $opt_l\n\t\$(LD) \$(OBJ) -o $opt_p $opt_l \$(LDFLAGS)\n";
 }
 close MAKEFILE;
+
+# Make a copy of the completed Makefile, read it back in, escape all relevant `=` signs
+# and write it back out
+rename($mkfile, $mkfile.'.bak');
+open(IN, '<' . $mkfile.'.bak') or die $!;
+open(OUT, '>' . $mkfile) or die $!;
+
+print OUT "EQUALS = =";
+
+while(<IN>) {
+   # Only escape '=' that aren't assignments (aka anything that spaces either side)
+   $_ =~ s/(?<! )=(?! )/\$\(EQUALS\)/g;
+   print OUT "$_";
+}
+close(IN);
+close(OUT);
 print " $mkfile is ready.\n";
 
 exec 'make', '-f', $mkfile if $opt_x;
